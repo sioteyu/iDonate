@@ -1,5 +1,6 @@
 package com.jograt.atenatics.idonate;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,6 +10,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import java.util.List;
 
@@ -66,13 +69,17 @@ public class MainActivity extends AppCompatActivity
             DonateFrgament fragment = new DonateFrgament();
             manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
         } else if (id == R.id.nav_profile) {
+            ProfileFragment fragment = new ProfileFragment();
+            manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
 
         } else if (id == R.id.nav_rewards) {
 
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_logout) {
-
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, LoginActivity.class ));
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
