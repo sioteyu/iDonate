@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class SellFrgament extends Fragment {
+public class DonateFrgament extends Fragment {
 
     private ImageView imageView;
     private EditText editName;
