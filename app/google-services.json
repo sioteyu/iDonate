@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "748961569991",
+    "firebase_url": "https://hackathon-codex-c04b1.firebaseio.com",
+    "project_id": "hackathon-codex-c04b1",
+    "storage_bucket": "hackathon-codex-c04b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748961569991:android:d0788c86749098b8",
+        "android_client_info": {
+          "package_name": "com.jograt.atenatics.idonate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748961569991-8clgkj0s68sjllpdt44lskv84uds7cl4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jograt.atenatics.idonate",
+            "certificate_hash": "fb939eb20641f57a907a129e98b6312ff6732e5f"
+          }
+        },
+        {
+          "client_id": "748961569991-9d9902ha7thei63lmv25lvmbnq7bm5a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDssroyscieecknSgubaDoAhOEqbQp6eoA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748961569991-9d9902ha7thei63lmv25lvmbnq7bm5a4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
