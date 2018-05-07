@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Greg\Desktop\iDonate\app\app.iml" filepath="C:\Users\Greg\Desktop\iDonate\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/iDonate.iml" filepath="$PROJECT_DIR$/iDonate.iml" />
+      <module fileurl="file://C:\Users\Greg\Desktop\iDonate\iDonate.iml" filepath="C:\Users\Greg\Desktop\iDonate\iDonate.iml" />
     </modules>
   </component>
 </project>
