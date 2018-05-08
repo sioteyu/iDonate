@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_donate) {
-            DonateFrgament fragment = new DonateFrgament();
+            DonateFragment fragment = new DonateFragment();
             manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
         } else if (id == R.id.nav_profile) {
             ProfileFragment fragment = new ProfileFragment();
