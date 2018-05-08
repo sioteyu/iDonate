@@ -2,21 +2,27 @@ package com.jograt.atenatics.idonate;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class GridViewAdapter extends BaseAdapter {
     private Context mContext;
+    private Integer[] imageID;
+    private String[] itemName;
 
-    public GridViewAdapter(Context c) {
+    public GridViewAdapter(Context c, Integer[] imageID, String[] itemName) {
         mContext = c;
+        this.imageID = imageID;
+        this.itemName = itemName;
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return imageID.length;
     }
 
     public Object getItem(int position) {
@@ -29,27 +35,24 @@ public class GridViewAdapter extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        View gridViewAndroid;
+        LayoutInflater inflater = (LayoutInflater) mContext
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         if (convertView == null) {
-            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setPadding(8, 8, 8, 8);
+
+            gridViewAndroid = new View(mContext);
+            gridViewAndroid = inflater.inflate(R.layout.activity_result_item, null);
+            TextView textViewAndroid = (TextView) gridViewAndroid.findViewById(R.id.itemName);
+            ImageView imageViewAndroid = (ImageView) gridViewAndroid.findViewById(R.id.itemImage);
+            textViewAndroid.setText(itemName[position]);
+            imageViewAndroid.setImageResource(imageID[position]);
         } else {
-            imageView = (ImageView) convertView;
+            gridViewAndroid = (View) convertView;
         }
 
-        imageView.setBackground(ContextCompat.getDrawable(mContext, mThumbIds[position]));
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.MarginLayoutParams.MATCH_PARENT, 500);
-        layoutParams.setMargins(150, 150, 150, 150);
-        imageView.setLayoutParams(layoutParams);
-        return imageView;
+        return gridViewAndroid;
     }
 
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.placeholderimage, R.drawable.placeholderimage,
-            R.drawable.placeholderimage, R.drawable.placeholderimage,
-            R.drawable.placeholderimage, R.drawable.placeholderimage,
-            R.drawable.placeholderimage, R.drawable.placeholderimage
-    };
+
 }

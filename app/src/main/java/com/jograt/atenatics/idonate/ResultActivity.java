@@ -8,22 +8,40 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 public class ResultActivity extends AppCompatActivity{
+    private GridView grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        GridView gridview = (GridView) findViewById(R.id.gridView);
-        gridview.setAdapter(new GridViewAdapter(this));
+        GridViewAdapter adapter = new GridViewAdapter(ResultActivity.this, imageID, itemName);
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
+        grid =(GridView) findViewById(R.id.gridView);
+        grid.setAdapter(adapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(ResultActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
-            }
+                Toast.makeText(ResultActivity.this, "You Clicked at " +itemName[+ position], Toast.LENGTH_SHORT).show();
 
+            }
         });
     }
+
+    private Integer[] imageID = {
+            R.drawable.placeholderimage, R.drawable.placeholderimage,
+            R.drawable.placeholderimage, R.drawable.placeholderimage,
+            R.drawable.placeholderimage, R.drawable.placeholderimage,
+            R.drawable.placeholderimage, R.drawable.placeholderimage
+    };
+
+    private String[] itemName = {
+            "itemName", "itemName",
+            "itemName", "itemName",
+            "itemName", "itemName",
+            "itemName", "itemName"
+    };
 }
