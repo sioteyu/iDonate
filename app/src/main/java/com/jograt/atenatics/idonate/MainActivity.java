@@ -1,10 +1,19 @@
 package com.jograt.atenatics.idonate;
 
+import android.*;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Gravity;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +21,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.jograt.atenatics.idonate.bean.ImageBean;
@@ -26,16 +36,20 @@ public class MainActivity extends AppCompatActivity
     private MaterialSearchBar searchBar;
     private FragmentManager manager;
 
-    private RecyclerView mHorizontalRecyclerView, mHorizontalRecyclerView2;
-    private HorizontalRecyclerViewAdapter horizontalAdapter;
-    private LinearLayoutManager horizontalLayoutManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         manager = getSupportFragmentManager();
+        homeFragment homeFragment = new homeFragment();
+        manager.beginTransaction().replace(R.id.include, homeFragment).addToBackStack(null).commit();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -43,50 +57,9 @@ public class MainActivity extends AppCompatActivity
         searchBar = (MaterialSearchBar) findViewById(R.id.searchBar);
         searchBar.setOnSearchActionListener(this);
 
-        mHorizontalRecyclerView = (RecyclerView) findViewById(R.id.horizontalRecyclerView);
-        mHorizontalRecyclerView2 = (RecyclerView) findViewById(R.id.horizontalRecyclerView2);
-
-        horizontalAdapter = new HorizontalRecyclerViewAdapter(fillWithData(), getApplication());
-        horizontalLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        mHorizontalRecyclerView.setLayoutManager(horizontalLayoutManager);
-        mHorizontalRecyclerView.setAdapter(horizontalAdapter);
-
-        horizontalAdapter = new HorizontalRecyclerViewAdapter(fillWithData(), getApplication());
-        horizontalLayoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        mHorizontalRecyclerView2.setLayoutManager(horizontalLayoutManager);
-        mHorizontalRecyclerView2.setAdapter(horizontalAdapter);
-
     }
 
-    public ArrayList<ImageBean> fillWithData() {
-        ArrayList<ImageBean> imageModelArrayList = new ArrayList<>();
-        ImageBean imageModel0 = new ImageBean();
-        imageModel0.setId(1);
-        imageModel0.setImageUrl("https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg");
-        imageModelArrayList.add(imageModel0);
 
-        ImageBean imageModel1 = new ImageBean();
-        imageModel1.setId(2);
-        imageModel1.setImageUrl("https://www.petmd.com/sites/default/files/petmd-cat-happy-13.jpg");
-        imageModelArrayList.add(imageModel1);
-
-        ImageBean imageModel2 = new ImageBean();
-        imageModel2.setId(3);
-        imageModel2.setImageUrl("https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg");
-        imageModelArrayList.add(imageModel2);
-
-        ImageBean imageModel3 = new ImageBean();
-        imageModel3.setId(3);
-        imageModel3.setImageUrl("https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg");
-        imageModelArrayList.add(imageModel3);
-
-        ImageBean imageModel4 = new ImageBean();
-        imageModel4.setId(3);
-        imageModel4.setImageUrl("https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg");
-        imageModelArrayList.add(imageModel4);
-
-        return imageModelArrayList;
-    }
 
     @Override
     public void onBackPressed() {
@@ -120,8 +93,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_donate) {
-            DonateFrgament fragment = new DonateFrgament();
-            manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
+
+            if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED){
+                ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 1);
+
+                DonateFragment fragment = new DonateFragment();
+                manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
+            }else{
+                DonateFragment fragment = new DonateFragment();
+                manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
+            }
+
         } else if (id == R.id.nav_profile) {
             ProfileFragment fragment = new ProfileFragment();
             manager.beginTransaction().replace(R.id.include, fragment).addToBackStack(null).commit();
@@ -148,7 +130,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSearchConfirmed(CharSequence text) {
-
+        ResultFragment resultFragment = new ResultFragment();
+        //manager.beginTransaction().add(R.id.include, resultFragment).addToBackStack(null).commit();
+        manager.beginTransaction().replace(R.id.include, resultFragment).addToBackStack(null).commit();
     }
 
     @Override

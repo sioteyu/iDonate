@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="10"
             android:ems="1"
-            android:inputType="text"
-            android:text="Product name " />
+            android:hint="Product name "
+            android:inputType="text" />
 
         <EditText
             android:id="@+id/editTextDescription"
@@ -43,8 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="90"
             android:ems="10"
-            android:inputType="textMultiLine"
-            android:text="Product description " />
+            android:hint="Product description "
+            android:inputType="textMultiLine" />
 
     </LinearLayout>
 
