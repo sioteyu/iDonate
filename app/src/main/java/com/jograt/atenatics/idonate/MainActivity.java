@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -118,7 +119,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onSearchConfirmed(CharSequence text) {
-
+        ResultFragment resultFragment = new ResultFragment();
+        manager.beginTransaction().add(R.id.include, resultFragment).addToBackStack(null).commit();
     }
 
     @Override
@@ -132,49 +134,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case MaterialSearchBar.BUTTON_BACK:
                 searchBar.disableSearch();
-                break;
-        }
-    }
-
-    private boolean hasCameraPermission(){
-        int result = 0;
-
-        String[] permissions = new String[]{Manifest.permission.CAMERA};
-
-        for(String permission: permissions){
-            result = checkCallingOrSelfPermission(permission);
-
-            if(result != PackageManager.PERMISSION_GRANTED){
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void requestCameraPermission(){
-        String[] permissions = new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION};
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            requestPermissions(permissions, 1);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        switch (requestCode){
-            case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    /*//run intent
-                    Intent intent = new Intent(LoginActivity.this, WeatherFragment.class);
-                    startActivity(intent);*/
-                }else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
-                            Toast.makeText(this, "Camera Access Denied!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
                 break;
         }
     }

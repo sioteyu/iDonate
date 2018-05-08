@@ -1,23 +1,34 @@
 package com.jograt.atenatics.idonate;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class ResultActivity extends AppCompatActivity{
+public class ResultFragment extends Fragment{
     private GridView grid;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_result, container, false);
 
-        GridViewAdapter adapter = new GridViewAdapter(ResultActivity.this, imageID, itemName);
+        grid =(GridView) view.findViewById(R.id.gridView);
 
-        grid =(GridView) findViewById(R.id.gridView);
+        return view;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        GridViewAdapter adapter = new GridViewAdapter(getActivity(), imageID, itemName);
+
         grid.setAdapter(adapter);
 
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -25,7 +36,7 @@ public class ResultActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(ResultActivity.this, "You Clicked at " +itemName[+ position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "You Clicked at " +itemName[+ position], Toast.LENGTH_SHORT).show();
 
             }
         });

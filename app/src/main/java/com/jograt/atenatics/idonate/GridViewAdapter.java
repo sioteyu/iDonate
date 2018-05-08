@@ -1,13 +1,11 @@
 package com.jograt.atenatics.idonate;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class GridViewAdapter extends BaseAdapter {
@@ -42,7 +40,7 @@ public class GridViewAdapter extends BaseAdapter {
         if (convertView == null) {
 
             gridViewAndroid = new View(mContext);
-            gridViewAndroid = inflater.inflate(R.layout.activity_result_item, null);
+            gridViewAndroid = inflater.inflate(R.layout.fragment_result_item, null);
             TextView textViewAndroid = (TextView) gridViewAndroid.findViewById(R.id.itemName);
             ImageView imageViewAndroid = (ImageView) gridViewAndroid.findViewById(R.id.itemImage);
             textViewAndroid.setText(itemName[position]);

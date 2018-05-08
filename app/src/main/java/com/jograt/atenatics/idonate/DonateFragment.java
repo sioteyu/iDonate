@@ -45,10 +45,6 @@ public class DonateFragment extends Fragment {
                 == PackageManager.PERMISSION_DENIED) {
 
         }
-
-        Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -56,7 +52,6 @@ public class DonateFragment extends Fragment {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imageView.setImageBitmap(photo);
         }
-
     }
 
 }
