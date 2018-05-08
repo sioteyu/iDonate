@@ -45,11 +45,11 @@ public class DonateFragment extends Fragment {
         super.onStart();
 
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, 1);
         }
 
         Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        //startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
