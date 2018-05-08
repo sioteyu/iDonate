@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity
 
         ImageBean imageModel1 = new ImageBean();
         imageModel1.setId(2);
-        imageModel1.setImageUrl("https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg");
+        imageModel1.setImageUrl("https://www.petmd.com/sites/default/files/petmd-cat-happy-13.jpg");
         imageModelArrayList.add(imageModel1);
 
         ImageBean imageModel2 = new ImageBean();
